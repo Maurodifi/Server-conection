@@ -8,7 +8,8 @@ router.post("/", uploadPic.single("profilePic"), validator.createUser,userCt.cre
 router.put("/:id", userCt.updateUser)
 router.delete("/:id",  userCt.deleteUsersById)
 router.post ("/login",userCt.loginUser)
-
-
+router.get("/forgot-password", userCt.forgot);
+router.get("/reset/:token", userCt.reset);
+router.post("/reset/:token", validator.resetPassword, userCt.saveNewPass);
 
 module.exports = router;

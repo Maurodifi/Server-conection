@@ -3,6 +3,52 @@ require("./config/db"); //enlazo servidor con DB
 const cors = require (`cors`)
 const express = require (`express`);//Llamo a express con todas sus funciones
 const server = express();//las cargo a nuestro servidor
+const exphbs = require("express-handlebars"); //llamo al handlebars
+const path = require("path");
+
+
+//Cargo bootstrap
+server.use(
+    "/css",
+    express.static(path.join(__dirname, "node_modules/bootstrap/dist/css"))
+    /* express.static(path.join(__dirname, "node_modules/bootstrap/dist/css")) */
+  );
+  server.use(
+    "/js",
+    express.static(path.join(__dirname, "node_modules/bootstrap/dist/js"))
+  ); 
+//Configuro Handlebars
+const hbs = exphbs.create({
+    defaultLayout: "main",
+    layoutsDir: path.join(__dirname, "views/layouts"), 
+    partialsDir: path.join(__dirname, "views/partials"),
+    helpers: {
+      errBelowInput: function (arr, inputName) {
+        if (!arr) return null;
+        const warning = arr.find((el) => el.param === inputName);
+        if (warning == undefined) {
+          return null;
+        } else {
+          return `
+          <div class="alert alert-danger" role="alert">
+              ${warning.msg}
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
+          `;
+        }
+      },
+    },
+  });
+  server.set("views", "./views");
+  server.engine("handlebars", hbs.engine);
+  server.set("view engine", "handlebars");
+
+
 
 //express como middlewares
 server.use(express.static(`public`));
