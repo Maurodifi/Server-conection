@@ -36,11 +36,11 @@ const resetPassword = [
   check("password_1")
     .exists()
     .isLength({ min: 8, max: 16 })
-    .withMessage("Between 8 and 16 characters")
+    .withMessage("Debe tener entre 8 y 16 caracteres")
     .trim(),
   check("password_2").custom(async (password_2, { req }) => {
     if (req.body.password_1 !== password_2) {
-      throw new Error("Passwords must be identical");
+      throw new Error("Las contraseñas no son iguales");
     }
   }),
   (req, res, next) => {

@@ -2,20 +2,17 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const PostSchema = new Schema(
   {
-    title: { type: String, required: true },
-    body: { type: String, required: true },
-    date: { type: Date, default: Date.now },
-    comments: [{ body: String, date: Date }],
-    hidden: { type: Boolean, default: false },
-    meta: {
-      votes: Number,
-      favs: Number,
-    },
+    raza: { type: String, required: true },
+    edad: { type: Number, required: true },
+    sexo: { type: String, required: true },
+    descripcion: [{ body: String, date: Date }],
+    castrado: { type: Boolean, default: false }, 
+    postPic: {type: String, default: ""}
   },
-  { timestamps: true }
+   { timestamps: true } 
 );
 
-PostSchema.index({ title: "text" });
+PostSchema.index({ raza: "text" });
 /* 
 crea un índice para "find by title" Esto podría funcionar en -> posts/find/:query -> http://localhost.../find/title=algo
 */

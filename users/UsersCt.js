@@ -21,7 +21,7 @@ const createUser = async (req, res, next) => {
     const password = await bc.hashPassword(req.body.password);
     
     /* const profilePic = `${public_url}/storage/${req.file.profilePic}` */
-    let pic = "";
+  let pic = "";
   if (req.file) {
     pic = `${public_url}/storage/${req.file.filename}`;
   }

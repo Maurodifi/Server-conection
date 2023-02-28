@@ -7,7 +7,8 @@ const userSchema = mongoose.Schema({
     userName: {type: String, required: true, unique: true},
     email: {type: String, required: true, unique: true},
     profilePic: {type: String, default: ""},
-    password: {type: String, required: true}
+    password: {type: String, required: true},
+    profilePic: {type: String, default: ""},
 },
 {
     tinestamps: true, //agrega los campos created at y update at

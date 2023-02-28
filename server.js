@@ -11,7 +11,6 @@ const path = require("path");
 server.use(
     "/css",
     express.static(path.join(__dirname, "node_modules/bootstrap/dist/css"))
-    /* express.static(path.join(__dirname, "node_modules/bootstrap/dist/css")) */
   );
   server.use(
     "/js",
