@@ -7,8 +7,7 @@ const tokenSign = async (user, time) => {
     return sign;
 }
 
-/* Verificamos si el token es valido */
-
+/* Verificamos el token*/
 const tokenVerify = async (tokenJWT) =>{
     try{
         return jwt.verify (tokenJWT, jwt_secret);

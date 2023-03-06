@@ -1,7 +1,7 @@
 //Modelo de datos
 const mongoose = require("mongoose");
 
-//Mongo DB schema
+//Mongo DB modelo
 const userSchema = mongoose.Schema({
     fullName: {type: String, required: true},
     userName: {type: String, required: true, unique: true},
@@ -11,7 +11,7 @@ const userSchema = mongoose.Schema({
     profilePic: {type: String, default: ""},
 },
 {
-    tinestamps: true, //agrega los campos created at y update at
+    tinestamps: true,
 })
 
 

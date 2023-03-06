@@ -58,7 +58,7 @@ const updateUser = async (req, res) => {
     }
 }
 
-// Login 
+// LLoguearse
 const loginUser = async (req, res, next) => {
   let error = new Error("Contraseña o Email invalido");
   const user = await User.find().where({email: req.body.email});
@@ -93,24 +93,19 @@ const loginUser = async (req, res, next) => {
 
 //Reseteo de contraseña
 const forgot = async (req, res, next) => {
-  //existe el email?
   let error = new Error("No existe un usuario con este mail");
   const user = await User.find().where({ email: req.body.email });
   if (!user.length) {
     error.status = 404;
     return next(error);
   }
-  //si existe, generamos el token de seguridad y el link de recuperación de contraseña
   const userForToken = {
     id: user[0].id,
     name: user[0].fullName,
     email: user[0].email,
   };
   const token = await jwt.tokenSign(userForToken, "15m");
-
   const link = `${process.env.public_url}/api/users/reset/${token}`;
-
-  //creamos el cuerpo del email, lo enviamos al usuario y lo indicamos en la response
   const mailDetails = {
     from: "PetApi@gmail.com",
     to: userForToken.email,
@@ -131,7 +126,7 @@ const forgot = async (req, res, next) => {
     }
   });
 };
-//Formulario GET para resetear contraseña
+//Formulario para resetear contraseña
 const reset = async (req, res, next) => {
   const { token } = req.params;
   const tokenStatus = jwt.tokenVerify(token);
@@ -141,7 +136,7 @@ const reset = async (req, res, next) => {
   res.render("reset", { tokenStatus, token });
 };
 
-//FORM POST para guardar nueva contraseña
+//Formulario para guardar nueva contraseña
 const saveNewPass = async (req, res, next) => {
   const { token } = req.params;
   const tokenStatus = await jwt.tokenVerify(token);

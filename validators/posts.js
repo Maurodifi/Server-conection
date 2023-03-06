@@ -5,7 +5,7 @@ const validatorCreatePost = [
   (req, res, next) => {
     try {
       validationResult(req).throw();
-      return next(); //si pasa validaciones, sigue hacia el controlador
+      return next();
     } catch (err) {
       res.status(400).json({ errors: err.array() });
     }
